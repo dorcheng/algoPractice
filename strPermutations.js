@@ -35,6 +35,27 @@ function strPerm(str){
   }).sort();
 }
 
+// recursive (not necessarily in alphabetical order)
+
+function getPermutations(str) {
+  if (str.length === 1) {
+    return new Set(str);
+  }
+  let firstChar = str[0];
+  let restOfStr = str.slice(1);
+
+  let restOfStrPerms = getPermutations(restOfStr);
+
+  let permutations = new Set();
+
+  restOfStrPerms.forEach(perm => {
+    for (let i = 0; i <= perm.length; i++) {
+      permutations.add(perm.slice(0, i) + firstChar + perm.slice(i));
+    }
+  });
+  return permutations;
+}
+
 /*
 Test Cases:
 */
